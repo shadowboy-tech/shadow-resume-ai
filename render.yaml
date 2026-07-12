@@ -4,7 +4,7 @@ services:
     name: shadow-backend
     env: docker
     plan: free
-    dockerfilePath: backend/Dockerfile  # <- fixed path (no leading ./)
+    dockerfilePath: ./Dockerfile
     autoDeploy: true
     healthCheckPath: /api/health
     # Optionally set environment variables from .env (Render will inject them securely)
