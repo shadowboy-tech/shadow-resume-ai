@@ -1,0 +1,21 @@
+# Render deployment configuration for Shadow backend
+services:
+  - type: web
+    name: shadow-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    autoDeploy: true
+    healthCheckPath: /api/health
+    # Optionally set environment variables from .env (Render will inject them securely)
+    envVars:
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX_NAME
+        sync: false
+      - key: MISTRAL_API_KEY
+        sync: false
+      - key: EMBEDDING_MODEL_NAME
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
