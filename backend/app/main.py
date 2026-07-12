@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.app.config import settings
 from backend.app.schemas import HealthResponse, ChatRequest, ChatResponse
 from backend.app.rag.retrieve import retrieve_chunks
+from backend.app.rag.generate import generate_answer
 
 app = FastAPI(
     title="Shadow API",
@@ -32,23 +33,20 @@ async def health_check():
     return HealthResponse(status="ok")
 
 
-@app.post("/api/chat")
+@app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     """
-    TEMPORARY M4 IMPLEMENTATION:
-    Returns the retrieved chunks directly so we can verify retrieval quality
-    before hooking up the LLM generator.
+    RAG Chat endpoint.
+    1. Embeds user question and searches Pinecone.
+    2. Passes retrieved chunks to Mistral to generate a grounded answer.
     """
+    # 1. Retrieve top context
     chunks = retrieve_chunks(request.question, top_k=3)
     
-    # Just format it roughly as a ChatResponse so the client doesn't break,
-    # but put the raw chunk text in the "answer" field for debugging.
-    debug_answer = "\n\n---\n\n".join(
-        f"[Score: {c['score']:.2f} | {c['source']}]\n{c['text']}" 
-        for c in chunks
-    )
+    # 2. Generate answer
+    answer, sources = generate_answer(request.question, chunks)
     
     return ChatResponse(
-        answer=f"**RETRIEVAL DEBUG ONLY**\n\n{debug_answer}",
-        sources=[c["source"] for c in chunks]
+        answer=answer,
+        sources=sources
     )
