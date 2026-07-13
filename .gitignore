@@ -33,3 +33,6 @@ desktop.ini
 # ── Model cache (can be large) ──
 *.bin
 *.onnx
+
+# ── Local Documentation ──
+How_It_Works_Beginner_Guide.md
