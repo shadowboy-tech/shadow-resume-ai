@@ -1,0 +1,44 @@
+name: Deploy Shadow Backend
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+
+      - name: Run ingestion (optional)
+        env:
+          PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+          PINECONE_INDEX_NAME: ${{ secrets.PINECONE_INDEX_NAME }}
+          EMBEDDING_MODEL_NAME: ${{ secrets.EMBEDDING_MODEL_NAME }}
+        run: |
+          python -m backend.ingestion.ingest
+
+      - name: Build Docker image
+        run: |
+          docker build -t shadow-backend:latest ./backend
+
+      - name: Deploy to Render (via API)
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          SERVICE_ID="<YOUR_SERVICE_ID>"
+          curl -X POST "https://api.render.com/v1/services/${SERVICE_ID}/deploys" \
+            -H "Authorization: Bearer ${RENDER_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{}'

@@ -31,11 +31,12 @@ class Settings:
 
     # ── Embedding ──
     # Must match between ingestion and query — this is the single source of truth
+    # Switched to mistral-embed API (1024-dim) — no local PyTorch model needed
     EMBEDDING_MODEL_NAME: str = os.getenv(
         "EMBEDDING_MODEL_NAME",
-        "sentence-transformers/all-MiniLM-L6-v2",
+        "mistral-embed",
     )
-    EMBEDDING_DIMENSION: int = 384  # all-MiniLM-L6-v2 output size
+    EMBEDDING_DIMENSION: int = 1024  # mistral-embed output size
 
     # ── CORS ──
     ALLOWED_ORIGINS: list[str] = [

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Inuwa Muhammad — AI / ML Engineer</title>
+<meta name="description" content="Portfolio of Muhammad Inuwa Muhammad — AI/ML Engineer building physics-informed deep learning, agentic AI, and computer vision systems.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<style>
+:root{
+  --ink:#14101f;
+  --muted:#665f78;
+  --bg:#faf8ff;
+  --bg-dark:#0b0714;
+  --panel:#ffffff;
+  --violet:#7c3aed;
+  --violet-deep:#4c1d95;
+  --coral:#ff5d3a;
+  --amber:#ffc145;
+  --line: rgba(20,16,31,0.1);
+  --line-dark: rgba(255,255,255,0.12);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter', sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.display-font{
+  font-family:'Space Grotesk', sans-serif;
+  letter-spacing:-0.02em;
+}
+.mono{
+  font-family:'JetBrains Mono', monospace;
+  letter-spacing:0.02em;
+}
+a{ text-decoration:none; }
+::selection{ background:var(--violet); color:#fff; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+
+/* ---------- Nav ---------- */
+.navbar-custom{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  padding: 18px 0;
+  transition: all .35s ease;
+  background: transparent;
+}
+.navbar-custom.scrolled{
+  background: rgba(250,248,255,0.85);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+  padding: 12px 0;
+}
+.nav-logo{
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  font-size:1.25rem;
+  color:var(--ink);
+}
+.nav-logo span{ color:var(--coral); }
+.nav-link-custom{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.82rem;
+  color:var(--ink);
+  opacity:0.75;
+  margin:0 14px;
+  position:relative;
+  transition: opacity .2s ease;
+}
+.nav-link-custom:hover{ opacity:1; color:var(--violet); }
+.btn-resume{
+  background:var(--ink);
+  color:#fff !important;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.8rem;
+  padding:9px 20px;
+  border-radius:100px;
+  transition: all .25s ease;
+  white-space:nowrap;
+}
+.btn-resume:hover{ background:var(--coral); transform: translateY(-2px); color:#fff; }
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;
+  min-height:100vh;
+  background: var(--bg-dark);
+  color:#fff;
+  display:flex; align-items:center;
+  padding-top:100px;
+  overflow:hidden;
+}
+.kspace-grid{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(124,58,237,0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,0.18) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, black 20%, transparent 75%);
+  animation: drift 26s linear infinite;
+}
+@keyframes drift{
+  0%{ background-position: 0 0, 0 0; }
+  100%{ background-position: 84px 42px, 42px 84px; }
+}
+.scan-line{
+  position:absolute; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, var(--coral), var(--amber), transparent);
+  opacity:0.6;
+  animation: scan 7s ease-in-out infinite;
+  filter: blur(0.5px);
+}
+@keyframes scan{
+  0%,100%{ top:12%; opacity:0; }
+  10%{ opacity:0.7; }
+  50%{ top:82%; opacity:0.5; }
+  90%{ opacity:0.7; }
+}
+.glow-orb{
+  position:absolute; border-radius:50%;
+  filter: blur(70px); opacity:0.55; pointer-events:none;
+}
+.orb-1{ width:420px; height:420px; background:var(--violet); top:-120px; right:-100px; }
+.orb-2{ width:320px; height:320px; background:var(--coral); bottom:-100px; right:20%; opacity:0.3; }
+
+.eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.82rem;
+  color:var(--amber);
+  display:inline-flex; align-items:center; gap:10px;
+  margin-bottom:22px;
+}
+.eyebrow::before{
+  content:''; width:28px; height:1px; background:var(--amber);
+}
+.hero h1{
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-weight:700;
+  line-height:1.02;
+  margin-bottom:24px;
+}
+.hero h1 .accent{ color:var(--coral); }
+.hero h1 .accent2{ color:var(--violet); -webkit-text-stroke: 1px rgba(255,255,255,0.3); }
+.hero-sub{
+  font-size:1.1rem;
+  color:rgba(255,255,255,0.68);
+  max-width:520px;
+  line-height:1.65;
+  margin-bottom:36px;
+}
+.btn-bold{
+  background: linear-gradient(120deg, var(--coral), var(--amber));
+  color:var(--ink) !important;
+  font-weight:600;
+  padding:14px 30px;
+  border-radius:100px;
+  border:none;
+  font-size:0.95rem;
+  transition: all .25s ease;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-bold:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(255,93,58,0.3); }
+.btn-outline-bold{
+  border:1px solid rgba(255,255,255,0.3);
+  color:#fff !important;
+  padding:14px 28px;
+  border-radius:100px;
+  font-size:0.95rem;
+  font-weight:500;
+  transition: all .25s ease;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-outline-bold:hover{ border-color:var(--violet); background:rgba(124,58,237,0.15); }
+
+.avatar-ring{
+  position:relative;
+  width:300px; height:300px;
+  margin:0 auto;
+}
+.avatar-circle{
+  width:100%; height:100%;
+  border-radius:50%;
+  background: linear-gradient(150deg, var(--violet), var(--violet-deep));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:4rem; font-weight:700; color:#fff;
+  border:3px solid rgba(255,255,255,0.15);
+  position:relative; z-index:2;
+  box-shadow: 0 0 0 14px rgba(124,58,237,0.08);
+}
+.avatar-ring::before{
+  content:'';
+  position:absolute; inset:-16px;
+  border-radius:50%;
+  border:1px dashed rgba(255,193,69,0.4);
+  animation: spin 40s linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+.badge-float{
+  position:absolute;
+  background:#fff; color:var(--ink);
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.72rem; font-weight:600;
+  padding:8px 14px; border-radius:100px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  z-index:3;
+  display:flex; align-items:center; gap:6px;
+}
+.badge-float .dot{ width:7px; height:7px; border-radius:50%; background:var(--coral); }
+.badge-1{ top:8%; left:-8%; }
+.badge-2{ bottom:10%; right:-10%; }
+
+.stat-strip{
+  border-top:1px solid var(--line-dark);
+  margin-top:70px;
+  padding-top:32px;
+}
+.stat-num{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:2rem; font-weight:700;
+  background: linear-gradient(120deg, var(--amber), var(--coral));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.stat-label{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.72rem; color:rgba(255,255,255,0.55);
+  text-transform:uppercase; letter-spacing:0.05em;
+}
+
+/* ---------- Section basics ---------- */
+section{ padding: 110px 0; position:relative; }
+.section-tag{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.78rem;
+  color:var(--coral);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:16px;
+}
+.section-tag::before{ content:''; width:24px; height:1px; background:var(--coral); }
+.section-title{
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  font-weight:700;
+  margin-bottom:20px;
+}
+.reveal{ opacity:0; transform: translateY(24px); transition: all .7s cubic-bezier(.2,.7,.3,1); }
+.reveal.in{ opacity:1; transform:none; }
+
+/* ---------- About / Skills ---------- */
+.about-lead{
+  font-size:1.15rem; line-height:1.75; color:var(--muted); max-width:640px;
+}
+.skill-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:26px 24px;
+  height:100%;
+  transition: all .3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.skill-card::before{
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background: linear-gradient(90deg, var(--violet), var(--coral));
+  transform: scaleX(0); transform-origin:left;
+  transition: transform .35s ease;
+}
+.skill-card:hover{ transform: translateY(-6px); box-shadow: 0 20px 40px rgba(20,16,31,0.08); }
+.skill-card:hover::before{ transform: scaleX(1); }
+.skill-card .icon-wrap{
+  width:46px; height:46px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(124,58,237,0.1); color:var(--violet);
+  font-size:1.3rem; margin-bottom:16px;
+}
+.skill-card h4{ font-size:1.05rem; margin-bottom:12px; }
+.skill-tags{ display:flex; flex-wrap:wrap; gap:7px; }
+.skill-tag{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.72rem;
+  background: var(--bg);
+  border:1px solid var(--line);
+  padding:5px 11px;
+  border-radius:100px;
+  color:var(--ink);
+  opacity:0.85;
+}
+
+/* ---------- Timeline ---------- */
+.timeline{ position:relative; padding-left:36px; }
+.timeline::before{
+  content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+  background: linear-gradient(180deg, var(--violet), var(--coral), var(--amber));
+}
+.timeline-item{ position:relative; padding-bottom:44px; }
+.timeline-item:last-child{ padding-bottom:0; }
+.timeline-dot{
+  position:absolute; left:-36px; top:4px;
+  width:14px; height:14px; border-radius:50%;
+  background:#fff; border:3px solid var(--violet);
+}
+.timeline-item.work .timeline-dot{ border-color:var(--coral); }
+.timeline-item.edu .timeline-dot{ border-color:var(--amber); }
+.timeline-year{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.78rem; color:var(--coral); font-weight:600;
+  margin-bottom:6px; display:block;
+}
+.timeline-item h4{ font-size:1.15rem; margin-bottom:4px; }
+.timeline-item .role-org{ color:var(--muted); font-size:0.92rem; margin-bottom:10px; }
+.timeline-item p.desc{ color:var(--muted); font-size:0.94rem; line-height:1.6; margin:0; }
+.tl-type-badge{
+  font-family:'JetBrains Mono', monospace; font-size:0.68rem;
+  padding:3px 10px; border-radius:100px; margin-left:10px;
+  display:inline-block; vertical-align:middle;
+}
+.tl-type-badge.work{ background:rgba(255,93,58,0.12); color:var(--coral); }
+.tl-type-badge.edu{ background:rgba(255,193,69,0.18); color:#b5790a; }
+.tl-type-badge.award{ background:rgba(124,58,237,0.12); color:var(--violet); }
+
+/* ---------- Projects ---------- */
+.bg-dark-section{ background:var(--bg-dark); color:#fff; }
+.case-study{
+  background: linear-gradient(150deg, #150c26, #1c1030);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:24px;
+  padding:48px;
+  position:relative;
+  overflow:hidden;
+}
+.case-study::after{
+  content:''; position:absolute; width:260px; height:260px; border-radius:50%;
+  background:var(--violet); filter:blur(90px); opacity:0.35; top:-80px; right:-60px;
+}
+.metric-pill{
+  display:inline-flex; flex-direction:column; align-items:flex-start;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px; padding:14px 18px; margin-right:12px; margin-bottom:12px;
+}
+.metric-pill .val{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.4rem; color:var(--amber); }
+.metric-pill .lbl{ font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:rgba(255,255,255,0.55); text-transform:uppercase; }
+.tag-pill{
+  font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14);
+  color:rgba(255,255,255,0.8); padding:5px 12px; border-radius:100px;
+  display:inline-block; margin:0 6px 6px 0;
+}
+
+.project-card{
+  background:#150c26;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  padding:30px;
+  height:100%;
+  transition: all .35s ease;
+  position:relative;
+}
+.project-card:hover{
+  transform: translateY(-6px);
+  border-color: var(--coral);
+  box-shadow: 0 20px 50px rgba(255,93,58,0.15);
+}
+.project-num{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.78rem; color:var(--coral); margin-bottom:14px; display:block;
+}
+.project-card h4{ font-size:1.2rem; margin-bottom:10px; color:#fff; }
+.project-card p{ color:rgba(255,255,255,0.6); font-size:0.92rem; line-height:1.65; margin-bottom:16px; }
+
+/* ---------- Contact ---------- */
+.form-control-custom{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px 16px;
+  font-family:'Inter', sans-serif;
+  color:var(--ink);
+  width:100%;
+  transition: border-color .2s ease;
+}
+.form-control-custom:focus{
+  outline:none; border-color:var(--violet);
+  box-shadow: 0 0 0 4px rgba(124,58,237,0.12);
+}
+.form-label-custom{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em;
+  color:var(--muted); margin-bottom:8px; display:block;
+}
+.contact-link-item{
+  display:flex; align-items:center; gap:14px;
+  padding:16px 0; border-bottom:1px solid var(--line);
+  color:var(--ink);
+  transition: all .2s ease;
+}
+.contact-link-item:hover{ color:var(--coral); padding-left:8px; }
+.contact-link-item .ic{
+  width:42px; height:42px; border-radius:12px;
+  background: rgba(124,58,237,0.1); color:var(--violet);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+
+footer{
+  background:var(--bg-dark); color:rgba(255,255,255,0.55);
+  padding:36px 0; font-family:'JetBrains Mono', monospace; font-size:0.8rem;
+}
+
+/* focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline: 2px solid var(--violet); outline-offset:3px;
+}
+
+@media (max-width: 991px){
+  .avatar-ring{ margin-top:50px; }
+  section{ padding:80px 0; }
+  .case-study{ padding:30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar navbar-custom navbar-expand-lg" id="mainNav">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="nav-logo" href="#top">MIM<span>.</span></a>
+    <div class="d-none d-lg-flex align-items-center">
+      <a class="nav-link-custom" href="#about">About</a>
+      <a class="nav-link-custom" href="#skills">Skills</a>
+      <a class="nav-link-custom" href="#timeline">Journey</a>
+      <a class="nav-link-custom" href="#work">Work</a>
+      <a class="nav-link-custom" href="#contact">Contact</a>
+    </div>
+    <a href="resume.pdf" download class="btn-resume">
+      <i class="bi bi-download me-1"></i>Résumé
+    </a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="kspace-grid"></div>
+  <div class="scan-line"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <div class="container position-relative" style="z-index:5;">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7">
+        <div class="eyebrow">AI/ML ENGINEER · MECHATRONICS, FUT MINNA</div>
+        <h1>Muhammad Inuwa <span class="accent">Muhammad.</span><br>I turn <span class="accent2">raw signal</span> into systems that ship.</h1>
+        <p class="hero-sub">I architect end-to-end ML pipelines — from k-space data and model design through to deployment — across medical imaging, robotics, NLP, and agentic AI. First Runner-Up at the RAIN × Meta AI Developer Academy Nigeria Hackathon, and a UN Millennium Fellow.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#work" class="btn-bold">See my work <i class="bi bi-arrow-down-right"></i></a>
+          <a href="#contact" class="btn-outline-bold">Let's talk <i class="bi bi-arrow-up-right"></i></a>
+        </div>
+
+        <div class="row stat-strip g-4">
+          <div class="col-4">
+            <div class="stat-num">65+</div>
+            <div class="stat-label">Active bot users</div>
+          </div>
+          <div class="col-4">
+            <div class="stat-num">13</div>
+            <div class="stat-label">Team led</div>
+          </div>
+          <div class="col-4">
+            <div class="stat-num">#1</div>
+            <div class="stat-label">Runner-up, national hackathon</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 text-center">
+        <div class="avatar-ring">
+          <div class="avatar-circle">MIM</div>
+          <div class="badge-float badge-1"><span class="dot"></span>Building E2E-VarNet</div>
+          <div class="badge-float badge-2"><span class="dot" style="background:var(--violet)"></span>Niger State, NG</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="container">
+    <div class="row gy-5">
+      <div class="col-lg-5 reveal">
+        <div class="section-tag">About</div>
+        <h2 class="section-title">Research depth, engineering discipline.</h2>
+      </div>
+      <div class="col-lg-7 reveal">
+        <p class="about-lead">
+          I'm an AI/ML Engineer and Mechatronics Engineering student at the Federal University of Technology Minna, focused on building intelligent systems that leave the notebook and reach real users. My core research is physics-informed deep learning for low-field MRI reconstruction — extending the End-to-End Variational Network with physics priors to make faster, more affordable scans viable in resource-limited settings.
+        </p>
+        <p class="about-lead">
+          I'm currently applying that same end-to-end discipline as an AI Robotics Engineer Intern at Coderina Edtech and a Machine Learning Intern at FlyRank AI, working across robotics, computer vision, and production ML pipelines. Earlier, I led a 13-person team building a road-hazard detection system, shipped a multilingual AI loan advisor for rural farmers, and scaled an agentic productivity bot to 65+ active users — each time owning the pipeline from data to deployment.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-tag reveal">Skills</div>
+    <h2 class="section-title reveal">What I build with.</h2>
+
+    <div class="reveal mb-5" style="max-width:760px;">
+      <div class="skill-tags">
+        <span class="skill-tag">Deep Learning</span><span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">Computer Vision</span><span class="skill-tag">Natural Language Processing</span>
+        <span class="skill-tag">MLOps</span><span class="skill-tag">Generative AI</span>
+        <span class="skill-tag">Microcontrollers</span><span class="skill-tag">Robotics</span>
+        <span class="skill-tag">Agentic AI</span>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-card">
+          <div class="icon-wrap"><i class="bi bi-cpu"></i></div>
+          <h4>ML &amp; Deep Learning</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">PyTorch</span><span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">Scikit-learn</span><span class="skill-tag">Keras</span>
+            <span class="skill-tag">XGBoost</span><span class="skill-tag">Optuna</span>
+            <span class="skill-tag">Hugging Face</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-card">
+          <div class="icon-wrap"><i class="bi bi-heart-pulse"></i></div>
+          <h4>Medical Imaging &amp; Computer Vision</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">E2E-VarNet</span><span class="skill-tag">MRI Reconstruction</span>
+            <span class="skill-tag">k-space Processing</span><span class="skill-tag">CNN</span>
+            <span class="skill-tag">OpenCV</span><span class="skill-tag">SSIM / PSNR</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-card">
+          <div class="icon-wrap"><i class="bi bi-chat-square-text"></i></div>
+          <h4>NLP, Generative &amp; Agentic AI</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">LLaMA 3.1</span><span class="skill-tag">Transformers</span>
+            <span class="skill-tag">LangChain</span><span class="skill-tag">LlamaIndex</span>
+            <span class="skill-tag">Whisper ASR</span><span class="skill-tag">RAG</span>
+            <span class="skill-tag">Prompt Engineering</span><span class="skill-tag">Multi-agent orchestration</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-card">
+          <div class="icon-wrap"><i class="bi bi-database"></i></div>
+          <h4>Data &amp; Backend Engineering</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span>
+            <span class="skill-tag">ETL Pipelines</span><span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">MongoDB</span><span class="skill-tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-card">
+          <div class="icon-wrap"><i class="bi bi-cloud-arrow-up"></i></div>
+          <h4>Cloud &amp; DevOps</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span><span class="skill-tag">GCP</span>
+            <span class="skill-tag">Azure</span><span class="skill-tag">Linux</span>
+            <span class="skill-tag">CI/CD</span><span class="skill-tag">Firebase RTDB</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="skill-card">
+          <div class="icon-wrap"><i class="bi bi-robot"></i></div>
+          <h4>Robotics &amp; Embedded Systems</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Arduino</span><span class="skill-tag">ESP32</span>
+            <span class="skill-tag">Microcontrollers</span><span class="skill-tag">IoT</span>
+            <span class="skill-tag">Telegram Bot API</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section id="timeline">
+  <div class="container">
+    <div class="row gy-5">
+      <div class="col-lg-4 reveal">
+        <div class="section-tag">Journey</div>
+        <h2 class="section-title">Education, work &amp; recognition.</h2>
+        <p class="about-lead">A quick path through where I've studied, worked, and been recognized.</p>
+      </div>
+      <div class="col-lg-8 reveal">
+        <div class="timeline">
+
+          <div class="timeline-item work">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2026 — PRESENT</span>
+            <h4>AI Robotics Engineer, Intern <span class="tl-type-badge work">Work</span></h4>
+            <div class="role-org">Coderina Edtech</div>
+            <p class="desc">Building an industrial-sorting robotic arm and an autonomous robotic dog; teaching AI fluency and LEGO Spike to young learners.</p>
+          </div>
+
+          <div class="timeline-item work">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2026 — PRESENT</span>
+            <h4>Machine Learning Intern <span class="tl-type-badge work">Work</span></h4>
+            <div class="role-org">FlyRank AI · Remote</div>
+            <p class="desc">Building end-to-end machine learning and deep learning pipelines.</p>
+          </div>
+
+          <div class="timeline-item edu">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2022 — PRESENT</span>
+            <h4>B.Eng, Mechatronics Engineering <span class="tl-type-badge edu">Education</span></h4>
+            <div class="role-org">Federal University of Technology Minna, Nigeria · 400 Level (In Progress)</div>
+          </div>
+
+          <div class="timeline-item work">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2024 — 2025</span>
+            <h4>AI Developer &amp; Customer Support <span class="tl-type-badge work">Work</span></h4>
+            <div class="role-org">Togo Mobility Limited</div>
+            <p class="desc">Delivered a production AI booking automation system that cut processing time by 60% and onboarded 20+ riders; provided bilingual (English/Hausa) support.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color:var(--violet)"></div>
+            <span class="timeline-year">2025</span>
+            <h4>First Runner-Up <span class="tl-type-badge award">Award</span></h4>
+            <div class="role-org">RAIN × Meta AI Developer Academy Nigeria Hackathon</div>
+            <p class="desc">Nationally recognized for applied AI innovation and engineering excellence.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color:var(--violet)"></div>
+            <span class="timeline-year">2025</span>
+            <h4>Millennium Fellow <span class="tl-type-badge award">Award</span></h4>
+            <div class="role-org">United Nations Academic Impact &amp; Millennium Campus Network</div>
+            <p class="desc">Selected globally for leadership, innovation, and social impact contributions.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color:var(--amber)"></div>
+            <span class="timeline-year">2024</span>
+            <h4>Scholarship Recipient <span class="tl-type-badge edu">Education</span></h4>
+            <div class="role-org">Halima Ibrahim Babangida Foundation</div>
+          </div>
+
+          <div class="timeline-item work">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">2023</span>
+            <h4>Community Manager &amp; Customer Support <span class="tl-type-badge work">Work</span></h4>
+            <div class="role-org">Jekaeat</div>
+            <p class="desc">Grew community engagement by 40% and resolved 95%+ of customer inquiries within SLA in a high-volume environment.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="work" class="bg-dark-section">
+  <div class="container">
+    <div class="section-tag reveal">Selected Work</div>
+    <h2 class="section-title reveal">Projects that reached real users.</h2>
+
+    <!-- Featured case study -->
+    <div class="case-study mt-5 reveal">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <span class="tag-pill">PyTorch</span><span class="tag-pill">E2E-VarNet</span><span class="tag-pill">Medical Imaging</span><span class="tag-pill">2025</span>
+          <h3 class="mt-3 mb-3" style="font-size:1.8rem;">Physics-Informed MRI Reconstruction for Low-Field MRI</h3>
+          <p style="color:rgba(255,255,255,0.68); line-height:1.75;">
+            Low-field MRI scanners produce noisy, low-resolution images with long scan times — a real barrier in resource-limited settings like Nigeria. I extended the End-to-End Variational Network with physics-informed priors from the MRI forward model, built a full k-space preprocessing pipeline with retrospective undersampling, and validated reconstruction quality across multiple acceleration factors using SSIM, PSNR, and NMSE.
+          </p>
+          <div class="mt-4">
+            <div class="metric-pill"><span class="val">0.86</span><span class="lbl">SSIM Achieved</span></div>
+            <div class="metric-pill"><span class="val">↓ Scan</span><span class="lbl">Time enabled</span></div>
+            <div class="metric-pill"><span class="val">3</span><span class="lbl">Eval metrics</span></div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:24px; font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:rgba(255,255,255,0.6); line-height:1.9;">
+            <div style="color:var(--amber);">// pipeline</div>
+            k-space (undersampled)<br>
+            &nbsp;&nbsp;→ retrospective mask<br>
+            &nbsp;&nbsp;→ E2E-VarNet + physics prior<br>
+            &nbsp;&nbsp;→ iterative refinement<br>
+            &nbsp;&nbsp;→ reconstructed image<br>
+            &nbsp;&nbsp;→ SSIM / PSNR / NMSE
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other projects grid -->
+    <div class="row g-4 mt-3">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="project-card">
+          <span class="project-num">02</span>
+          <h4>Road Abnormalities Detector</h4>
+          <p>Led a 13-member team to detect road cracks, potholes, and bumps from images for smart infrastructure use cases, evaluated on precision, recall, and F1.</p>
+          <div><span class="tag-pill">PyTorch</span><span class="tag-pill">CNN</span><span class="tag-pill">OpenCV</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="project-card">
+          <span class="project-num">03</span>
+          <h4>Smart Motion Bin</h4>
+          <p>An autonomous indoor robot that navigates to workstations on command, with a real-time web command center for telemetry and control.</p>
+          <div><span class="tag-pill">JavaScript</span><span class="tag-pill">Firebase</span><span class="tag-pill">IoT</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="project-card">
+          <span class="project-num">04</span>
+          <h4>Multimodal AI Loan Advisor</h4>
+          <p>Financial literacy AI for rural farmers, processing loan documents in 8 Nigerian languages via OCR, ASR, TTS, and an LLM risk-assessment engine.</p>
+          <div><span class="tag-pill">LLaMA 3.1</span><span class="tag-pill">Whisper</span><span class="tag-pill">Tesseract</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="project-card">
+          <span class="project-num">05</span>
+          <h4>ProDOS — Agentic Productivity Bot</h4>
+          <p>An autonomous Telegram productivity bot scaled to 65+ active student users through progress logging and peer-competition features.</p>
+          <div><span class="tag-pill">Agentic AI</span><span class="tag-pill">Python</span><span class="tag-pill">Telegram API</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="project-card">
+          <span class="project-num">06</span>
+          <h4>AI Booking Automation System</h4>
+          <p>A Telegram-based booking system for Togo Mobility, automating registration and payment verification — cutting manual booking time by 60%.</p>
+          <div><span class="tag-pill">Python</span><span class="tag-pill">Payments</span><span class="tag-pill">Telegram API</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" style="background:#fff;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5 reveal">
+        <div class="section-tag">Contact</div>
+        <h2 class="section-title">Let's build something.</h2>
+        <p class="about-lead mb-4">Open to AI/ML roles, research collaboration, and interesting problems. Reach out directly, or use the form.</p>
+
+        <a href="mailto:inuwamuhammad930@gmail.com" class="contact-link-item">
+          <span class="ic"><i class="bi bi-envelope"></i></span>
+          <span>inuwamuhammad930@gmail.com</span>
+        </a>
+        <a href="tel:+2349168730302" class="contact-link-item">
+          <span class="ic"><i class="bi bi-telephone"></i></span>
+          <span>+234 916 873 0302</span>
+        </a>
+        <a href="https://linkedin.com/in/muhammad-inuwa-muhammad" target="_blank" rel="noopener" class="contact-link-item">
+          <span class="ic"><i class="bi bi-linkedin"></i></span>
+          <span>linkedin.com/in/muhammad-inuwa-muhammad</span>
+        </a>
+        <a href="https://github.com/shadowboy-tech" target="_blank" rel="noopener" class="contact-link-item">
+          <span class="ic"><i class="bi bi-github"></i></span>
+          <span>github.com/shadowboy-tech</span>
+        </a>
+      </div>
+
+      <div class="col-lg-7 reveal">
+        <form id="contactForm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label-custom">Name</label>
+              <input type="text" class="form-control-custom" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Email</label>
+              <input type="email" class="form-control-custom" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label-custom">Subject</label>
+              <input type="text" class="form-control-custom">
+            </div>
+            <div class="col-12">
+              <label class="form-label-custom">Message</label>
+              <textarea class="form-control-custom" rows="5" required></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn-bold" style="border:none;">Send message <i class="bi bi-send"></i></button>
+              <span id="formNote" class="mono d-block mt-3" style="font-size:0.8rem; color:var(--muted);"></span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container d-flex flex-wrap justify-content-between align-items-center gap-3">
+    <span>© <span id="year"></span> Muhammad Inuwa Muhammad — Built with intent.</span>
+    <div class="d-flex gap-3">
+      <a href="https://github.com/shadowboy-tech" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55)"><i class="bi bi-github"></i></a>
+      <a href="https://linkedin.com/in/muhammad-inuwa-muhammad" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55)"><i class="bi bi-linkedin"></i></a>
+      <a href="mailto:inuwamuhammad930@gmail.com" style="color:rgba(255,255,255,0.55)"><i class="bi bi-envelope"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Navbar scroll state
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Contact form (static hosting has no backend — mailto fallback)
+  const form = document.getElementById('contactForm');
+  const note = document.getElementById('formNote');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const [name, email] = form.querySelectorAll('input[type="text"], input[type="email"]');
+    const subject = form.querySelectorAll('input[type="text"]')[1]?.value || 'Portfolio contact';
+    const message = form.querySelector('textarea').value;
+    const mailto = `mailto:inuwamuhammad930@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message + '\n\nFrom: ' + name.value + ' (' + email.value + ')')}`;
+    window.location.href = mailto;
+    note.textContent = 'Opening your email client…';
+  });
+</script>
+</body>
+</html>

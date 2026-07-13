@@ -1,42 +1,40 @@
 # backend/app/rag/embed.py
 """
-Embedding module — wraps sentence-transformers for both ingestion and query.
+Embedding module — calls Mistral's mistral-embed API.
 
-The model is loaded once (lazily) and reused. Using a module-level cache
-instead of re-loading on every request because:
-1. The model is ~80MB — loading it takes a couple seconds
-2. It's stateless, so sharing it across requests is safe
-3. sentence-transformers handles batching internally
+Switched from sentence-transformers (local PyTorch, ~400 MB RAM)
+to the Mistral Embeddings API to keep the Render container under 512 MB.
+
+Model: mistral-embed
+Output dimension: 1024
 """
 
 from typing import List
-from sentence_transformers import SentenceTransformer
+from mistralai.client import Mistral
+from backend.app.config import settings
 
-# Lazy-loaded model cache
-_model: SentenceTransformer | None = None
-
-
-def get_model(model_name: str) -> SentenceTransformer:
-    """Load the embedding model once, cache it for reuse."""
-    global _model
-    if _model is None:
-        print(f"[embed] Loading model: {model_name}")
-        _model = SentenceTransformer(model_name)
-        print(f"[embed] Model loaded (dimension: {_model.get_sentence_embedding_dimension()})")
-    return _model
+# Lazily initialised Mistral client
+_client: Mistral | None = None
 
 
-def embed_texts(texts: List[str], model_name: str) -> List[List[float]]:
+def _get_client() -> Mistral:
+    global _client
+    if _client is None:
+        _client = Mistral(api_key=settings.MISTRAL_API_KEY)
+    return _client
+
+
+def embed_texts(texts: List[str], model_name: str = "mistral-embed") -> List[List[float]]:
     """
-    Embed a batch of texts into vectors.
+    Embed a batch of texts via the Mistral Embeddings API.
 
-    Returns plain Python lists (not numpy) because Pinecone expects that format.
+    Returns plain Python lists (Pinecone-compatible format).
     """
-    model = get_model(model_name)
-    embeddings = model.encode(texts, show_progress_bar=len(texts) > 10)
-    return embeddings.tolist()
+    client = _get_client()
+    response = client.embeddings.create(model=model_name, inputs=texts)
+    return [item.embedding for item in response.data]
 
 
-def embed_query(query: str, model_name: str) -> List[float]:
+def embed_query(query: str, model_name: str = "mistral-embed") -> List[float]:
     """Embed a single query string. Convenience wrapper over embed_texts."""
     return embed_texts([query], model_name)[0]
