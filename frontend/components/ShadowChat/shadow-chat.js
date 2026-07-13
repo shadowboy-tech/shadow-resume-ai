@@ -27,8 +27,9 @@
     return element;
   };
 
-  // Build the widget elements
-  const fab = el('div', { id: 'sc-fab', title: 'Chat with Shadow' }, '💬');
+  // Build the widget elements — reuse existing #sc-fab if present in the DOM (preserves data-api-url)
+  const fab = document.getElementById('sc-fab') || el('div', { id: 'sc-fab', title: 'Chat with Shadow' }, '💬');
+  fab.style.display = ''; // ensure visible
   const panel = el('div', { id: 'sc-panel' },
     el('div', { id: 'sc-header' }, 'ShadowChat'),
     el('div', { id: 'sc-messages' }),
@@ -38,8 +39,8 @@
     )
   );
 
-  // Insert into page
-  document.body.appendChild(fab);
+  // Insert into page (only append fab if it wasn't already in the DOM)
+  if (!fab.parentNode) document.body.appendChild(fab);
   document.body.appendChild(panel);
 
   // State
